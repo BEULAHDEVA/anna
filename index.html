@@ -2,97 +2,121 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Happy Birthday!</title>
+  <title>Happy Birthday</title>
   <style>
+    /* Import the Ben 10 retro font */
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+    :root {
+      --bg: #0c0c0c;        /* Dark background */
+      --accent: #39ff14;    /* Ben 10 neon green */
+      --text: #ffffff;      /* White text */
+      --secondary: #1a1a1a; /* Dark gray */
+    }
+
     body {
       margin: 0;
-      padding: 0;
-      background: black;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--bg);
       overflow: hidden;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      color: white;
+      font-family: 'Press Start 2P', cursive; /* ✅ Font applied */
+    }
+
+    .logo-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70vmin;
+      height: 70vmin;
+      background: url('https://static.wikia.nocookie.net/ben10/images/8/89/Omnitrix_symbol.png') no-repeat center/contain;
+      opacity: 0.15;
+      filter: drop-shadow(0 0 25px var(--accent));
+      z-index: 0;
+      animation: pulse 3s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.15; }
+      50% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.25; }
+    }
+
+    .birthday-text {
+      position: absolute;
+      top: 15%;
+      width: 100%;
       text-align: center;
+      font-size: 3rem;
+      color: var(--accent);
+      text-shadow: 2px 2px 8px #000, 0 0 20px var(--accent);
+      z-index: 2;
+      font-family: 'Press Start 2P', cursive; /* ✅ Force font */
     }
 
-   h1 {
-      font-family: 'Press Start 2P', cursive;
-      font-size: 2.5rem;
-      color: #39ff14;
-      text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
-      margin-top: 20px;
-    }
-
-    p {
-      font-size: 1.2rem;
-      text-align: center;
-      margin-top: 10px;
-    }
-
-   
-    .circle-photo {
-      width: 250px;
-      height: 250px;
+    .photo {
+      position: relative;
+      z-index: 2;
+      width: 220px;
+      height: 220px;
       border-radius: 50%;
-      border: 5px solid #39ff14;
-      box-shadow: 0 0 40px #39ff14;
+      overflow: hidden;
+      border: 6px solid var(--accent);
+      box-shadow: 0 0 25px var(--accent);
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
     }
 
-   .pokemon {
-  position: absolute;
-  top: -100px;
-  width: 70px; /* Increased size (was 40px before) */
-  animation: fall linear infinite;
-}
-
+    .pokemon {
+      position: absolute;
+      top: -100px;
+      width: 80px;   /* ✅ Increased Pokémon size */
+      animation: fall linear infinite;
+    }
 
     @keyframes fall {
-      0% {
-        transform: translateY(-100px) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(110vh) rotate(360deg);
-        opacity: 0.8;
-      }
+      0% { transform: translateY(-100px); opacity: 1; }
+      100% { transform: translateY(110vh); opacity: 0; }
     }
   </style>
 </head>
 <body>
-  <h1>HAPPY BIRTHDAY!</h1>
-  <p>To the best brother in the world 💚<br>love you always</p>
+  <div class="logo-bg"></div>
 
-  <div class="photo-container">
-    <img src="photo.jpg" alt="Birthday Photo" class="circle-photo">
+  <div class="birthday-text">HAPPY BIRTHDAY!</div>
+
+  <div class="photo">
+    <img src="photo.jpg" alt="Birthday Photo">
   </div>
 
   <script>
-    const pokemons = [
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/39.png",
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png"
+    const pokemonList = [
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",  // Pikachu
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",   // Bulbasaur
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",   // Charmander
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",   // Squirtle
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/39.png",  // Jigglypuff
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png"  // Eevee
     ];
 
     function createPokemon() {
-      const pokemon = document.createElement("img");
-      pokemon.src = pokemons[Math.floor(Math.random() * pokemons.length)];
-      pokemon.classList.add("pokemon");
-      pokemon.style.left = Math.random() * window.innerWidth + "px";
-      pokemon.style.animationDuration = (Math.random() * 3 + 3) + "s"; // 3–6s fall
-      pokemon.style.width = pokemon.style.height = (Math.random() * 30 + 30) + "px"; // 30–60px size
-      document.body.appendChild(pokemon);
+      const img = document.createElement("img");
+      img.src = pokemonList[Math.floor(Math.random() * pokemonList.length)];
+      img.classList.add("pokemon");
+      img.style.left = Math.random() * 100 + "vw";
+      img.style.animationDuration = (6 + Math.random() * 5) + "s";
+      document.body.appendChild(img);
 
-      setTimeout(() => {
-        pokemon.remove();
-      }, 6000);
+      setTimeout(() => img.remove(), 12000);
     }
 
-    setInterval(createPokemon, 800);
+    setInterval(createPokemon, 900);
   </script>
 </body>
 </html>
-
-
