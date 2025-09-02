@@ -2,154 +2,103 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Happy Birthday</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
-    :root {
-      --bg: #0c0c0c;        /* Dark background */
-      --accent: #39ff14;    /* Ben 10 neon green */
-      --text: #ffffff;      /* White text */
-      --secondary: #1a1a1a; /* Dark gray */
-    }
-
     body {
       margin: 0;
       height: 100vh;
+      background: black;
+      color: white;
+      font-family: 'Poppins', sans-serif;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      background: var(--bg);
+      justify-content: flex-start;
       overflow: hidden;
-      font-family: 'Press Start 2P', cursive;
-    }
-
-    /* Ben 10 Omnitrix Logo */
-    .logo-bg {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 70vmin;
-      height: 70vmin;
-      background: url('https://static.wikia.nocookie.net/ben10/images/8/89/Omnitrix_symbol.png') no-repeat center/contain;
-      opacity: 0.15;
-      filter: drop-shadow(0 0 25px var(--accent));
-      z-index: 0;
-      animation: pulse 3s infinite ease-in-out;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.15; }
-      50% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.25; }
-    }
-
-    /* Birthday Text */
-    .birthday-text {
-      position: absolute;
-      top: 10%;
-      width: 100%;
-      text-align: center;
-      font-size: 3rem;
-      color: var(--accent);
-      text-shadow: 2px 2px 8px #000, 0 0 20px var(--accent);
-      z-index: 2;
-    }
-
-    /* Sub-message */
-    .birthday-subtext {
-      position: absolute;
-      top: 20%;
-      width: 100%;
-      text-align: center;
-      font-size: 1.2rem;
-      color: var(--text);
-      text-shadow: 1px 1px 6px #000;
-      z-index: 2;
-    }
-
-    /* Photo */
-    .photo {
       position: relative;
-      z-index: 2;
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 6px solid var(--accent);
-      box-shadow: 0 0 25px var(--accent);
     }
 
-    .photo img {
-      width: 100%;
-      height: 100%;
+    h1 {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 2.5rem;
+      color: #39ff14;
+      text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
+      margin-top: 20px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #39ff14;
+    }
+
+    .photo {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 4px solid #39ff14;
+      box-shadow: 0 0 20px #39ff14;
       object-fit: cover;
     }
 
     /* Falling Pokémon */
     .pokemon {
       position: absolute;
-      top: -10vh;
-      width: 50px;
-      height: 50px;
-      z-index: 1;
-      animation: fall linear infinite;
+      width: 60px;
+      height: 60px;
+      pointer-events: none;
+      animation: fall linear forwards;
     }
 
     @keyframes fall {
-      0% {
-        transform: translateY(-10vh) translateX(0);
-        opacity: 1;
-      }
-      50% {
-        transform: translateY(50vh) translateX(30px);
-        opacity: 0.9;
-      }
-      100% {
-        transform: translateY(120vh) translateX(-30px);
-        opacity: 0;
-      }
+      from { transform: translateY(-100px); }
+      to { transform: translateY(110vh); }
     }
   </style>
 </head>
 <body>
-  <div class="logo-bg"></div>
+  <h1>HAPPY BIRTHDAY!</h1>
+  <p>To the best brother in the world 💚<br>Love you always</p>
 
-  <div class="birthday-text">HAPPY BIRTHDAY!</div>
-  <div class="birthday-subtext">To the best brother in the world 💚<br>love you always</div>
-
-  <div class="photo">
-    <!-- Replace photo.jpg with your brother's photo -->
-    <img src="https://github.com/BEULAHDEVA/anna/blob/main/482702173_672101481991408_1076893576886124239_n.jpg?raw=true" alt="Birthday Photo">
+  <div class="card">
+    <img src="your-photo.jpg" alt="Birthday Photo" class="photo">
   </div>
 
   <script>
+    // List of Pokémon images
     const pokemonList = [
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",  // Pikachu
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",   // Bulbasaur
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",   // Charmander
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",   // Squirtle
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/39.png",  // Jigglypuff
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png"  // Eevee
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png", // Pikachu
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",  // Charmander
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",  // Bulbasaur
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",  // Squirtle
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/39.png", // Jigglypuff
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png" // Eevee
     ];
 
     function createPokemon() {
-      const img = document.createElement("img");
-      img.src = pokemonList[Math.floor(Math.random() * pokemonList.length)];
-      img.classList.add("pokemon");
-      img.style.left = Math.random() * 100 + "vw";
-      img.style.animationDuration = 8 + Math.random() * 6 + "s";
-      img.style.width = img.style.height = (40 + Math.random() * 30) + "px";
-      document.body.appendChild(img);
+      const pokemon = document.createElement("img");
+      pokemon.src = pokemonList[Math.floor(Math.random() * pokemonList.length)];
+      pokemon.classList.add("pokemon");
+      pokemon.style.left = Math.random() * window.innerWidth + "px";
+      pokemon.style.animationDuration = (3 + Math.random() * 3) + "s";
+      document.body.appendChild(pokemon);
 
-      setTimeout(() => img.remove(), 15000);
+      pokemon.addEventListener("animationend", () => {
+        pokemon.remove();
+      });
     }
 
-    // Keep Pokémon falling automatically
     setInterval(createPokemon, 800);
   </script>
 </body>
 </html>
-
-
-
