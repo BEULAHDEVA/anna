@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+    :root {
+      --bg: #0c0c0c;        /* Dark background */
+      --accent: #39ff14;    /* Ben 10 neon green */
+      --text: #ffffff;      /* White text */
+      --secondary: #1a1a1a; /* Dark gray */
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--bg);
+      overflow: hidden;
+      font-family: 'Press Start 2P', cursive;
+    }
+
+    /* Ben 10 Omnitrix Logo */
+    .logo-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70vmin;
+      height: 70vmin;
+      background: url('https://static.wikia.nocookie.net/ben10/images/8/89/Omnitrix_symbol.png') no-repeat center/contain;
+      opacity: 0.15;
+      filter: drop-shadow(0 0 25px var(--accent));
+      z-index: 0;
+      animation: pulse 3s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.15; }
+      50% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.25; }
+    }
+
+    /* Birthday Text */
+    .birthday-text {
+      position: absolute;
+      top: 10%;
+      width: 100%;
+      text-align: center;
+      font-size: 3rem;
+      color: var(--accent);
+      text-shadow: 2px 2px 8px #000, 0 0 20px var(--accent);
+      z-index: 2;
+    }
+
+    /* Sub-message */
+    .birthday-subtext {
+      position: absolute;
+      top: 20%;
+      width: 100%;
+      text-align: center;
+      font-size: 1.2rem;
+      color: var(--text);
+      text-shadow: 1px 1px 6px #000;
+      z-index: 2;
+    }
+
+    /* Photo */
+    .photo {
+      position: relative;
+      z-index: 2;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 6px solid var(--accent);
+      box-shadow: 0 0 25px var(--accent);
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Falling Pokémon */
+    .pokemon {
+      position: absolute;
+      top: -10vh;
+      width: 50px;
+      height: 50px;
+      z-index: 1;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10vh) translateX(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(50vh) translateX(30px);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(120vh) translateX(-30px);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="logo-bg"></div>
+
+  <div class="birthday-text">HAPPY BIRTHDAY!</div>
+  <div class="birthday-subtext">To the best brother in the world 💚<br>love you always</div>
+
+  <div class="photo">
+    <!-- Replace photo.jpg with your brother's photo -->
+    <img src=https://instagram.fblr4-4.fna.fbcdn.net/v/t51.2885-19/482702173_672101481991408_1076893576886124239_n.jpg?stp=dst-jpg_s320x320_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=instagram.fblr4-4.fna.fbcdn.net&_nc_cat=104&_nc_oc=Q6cZ2QFAWhHX9y9kiioVRZj3cXG3RTN3zgqlyowXTGD5oXJB62yWqULiIxB-CzY1tCse-okv04SKWyNkH4MT_cYEPss_&_nc_ohc=FRlLLw3mUYUQ7kNvwH-yXAI&_nc_gid=xacOpN3Ws20N747LSU-GAA&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfWOD81sOoYEwmBH8aVVBBK9mrR0Be53y5E7m7bw_cF60w&oe=68BCF973&_nc_sid=8b3546 alt="Birthday Photo">
+  </div>
+
+  <script>
+    const pokemonList = [
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",  // Pikachu
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",   // Bulbasaur
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",   // Charmander
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",   // Squirtle
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/39.png",  // Jigglypuff
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png"  // Eevee
+    ];
+
+    function createPokemon() {
+      const img = document.createElement("img");
+      img.src = pokemonList[Math.floor(Math.random() * pokemonList.length)];
+      img.classList.add("pokemon");
+      img.style.left = Math.random() * 100 + "vw";
+      img.style.animationDuration = 8 + Math.random() * 6 + "s";
+      img.style.width = img.style.height = (40 + Math.random() * 30) + "px";
+      document.body.appendChild(img);
+
+      setTimeout(() => img.remove(), 15000);
+    }
+
+    // Keep Pokémon falling automatically
+    setInterval(createPokemon, 800);
+  </script>
+</body>
+</html>
