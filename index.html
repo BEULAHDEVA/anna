@@ -1,101 +1,99 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <title>Happy Birthday!</title>
   <style>
     body {
       margin: 0;
-      height: 100vh;
+      padding: 0;
       background: black;
-      color: white;
-      font-family: 'Poppins', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
       overflow: hidden;
-      position: relative;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      color: white;
+      text-align: center;
     }
 
     h1 {
-      font-family: 'Press Start 2P', cursive;
-      font-size: 2.5rem;
-      color: #39ff14;
-      text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
       margin-top: 20px;
+      font-size: 3em;
+      color: #39ff14;
+      text-shadow: 0 0 20px #39ff14;
     }
 
     p {
-      font-size: 1.2rem;
-      text-align: center;
-      margin-top: 10px;
+      font-size: 1.2em;
+      color: white;
     }
 
-    .card {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 20px;
-      margin-top: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px #39ff14;
+    .photo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 100px;
+      background: none; /* ✅ removed grey box */
+      box-shadow: none; /* ✅ removed shadow */
     }
 
-    .photo {
-      width: 200px;
-      height: 200px;
+    .circle-photo {
+      width: 250px;
+      height: 250px;
       border-radius: 50%;
-      border: 4px solid #39ff14;
-      box-shadow: 0 0 20px #39ff14;
+      border: 5px solid #39ff14;
+      box-shadow: 0 0 40px #39ff14;
       object-fit: cover;
     }
 
-    /* Falling Pokémon */
-    .pokemon {
-      position: absolute;
-      width: 60px;
-      height: 60px;
-      pointer-events: none;
-      animation: fall linear forwards;
-    }
+   .pokemon {
+  position: absolute;
+  top: -100px;
+  width: 70px; /* Increased size (was 40px before) */
+  animation: fall linear infinite;
+}
+
 
     @keyframes fall {
-      from { transform: translateY(-100px); }
-      to { transform: translateY(110vh); }
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0.8;
+      }
     }
   </style>
 </head>
 <body>
   <h1>HAPPY BIRTHDAY!</h1>
-  <p>To the best brother in the world 💚<br>Love you always</p>
+  <p>To the best brother in the world 💚<br>love you always</p>
 
-  <div class="card">
-    <img src="photo.jpg" alt="Birthday Photo" class="photo">
+  <div class="photo-container">
+    <img src="photo.jpg" alt="Birthday Photo" class="circle-photo">
   </div>
 
   <script>
-    // List of Pokémon images
-    const pokemonList = [
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png", // Pikachu
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",  // Charmander
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",  // Bulbasaur
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",  // Squirtle
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/39.png", // Jigglypuff
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png" // Eevee
+    const pokemons = [
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/39.png",
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png"
     ];
 
     function createPokemon() {
       const pokemon = document.createElement("img");
-      pokemon.src = pokemonList[Math.floor(Math.random() * pokemonList.length)];
+      pokemon.src = pokemons[Math.floor(Math.random() * pokemons.length)];
       pokemon.classList.add("pokemon");
       pokemon.style.left = Math.random() * window.innerWidth + "px";
-      pokemon.style.animationDuration = (3 + Math.random() * 3) + "s";
+      pokemon.style.animationDuration = (Math.random() * 3 + 3) + "s"; // 3–6s fall
+      pokemon.style.width = pokemon.style.height = (Math.random() * 30 + 30) + "px"; // 30–60px size
       document.body.appendChild(pokemon);
 
-      pokemon.addEventListener("animationend", () => {
+      setTimeout(() => {
         pokemon.remove();
-      });
+      }, 6000);
     }
 
     setInterval(createPokemon, 800);
