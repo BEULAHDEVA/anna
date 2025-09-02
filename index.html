@@ -53,6 +53,7 @@
       color: var(--accent);
       text-shadow: 2px 2px 8px #000, 0 0 20px var(--accent);
       z-index: 2;
+      font-family: 'Press Start 2P', cursive; /* ✅ Force font */
     }
 
     .photo {
@@ -72,10 +73,10 @@
       object-fit: cover;
     }
 
-    .falling {
+    .pokemon {
       position: absolute;
       top: -100px;
-      width: 80px;   /* Default size */
+      width: 80px;   /* ✅ Increased Pokémon size */
       animation: fall linear infinite;
     }
 
@@ -104,39 +105,18 @@
       "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png"  // Eevee
     ];
 
-    const omnitrixList = [
-      "https://static.wikia.nocookie.net/ben10/images/8/89/Omnitrix_symbol.png",
-      "https://i.imgur.com/7sIDr3G.png",  // alternate omnitrix design
-      "https://i.imgur.com/XOgmG8r.png"   // another green glowing symbol
-    ];
-
-    function createFallingItem() {
+    function createPokemon() {
       const img = document.createElement("img");
-
-      // Randomly decide: 70% Pokémon, 30% Omnitrix
-      if (Math.random() < 0.7) {
-        img.src = pokemonList[Math.floor(Math.random() * pokemonList.length)];
-      } else {
-        img.src = omnitrixList[Math.floor(Math.random() * omnitrixList.length)];
-      }
-
-      img.classList.add("falling");
+      img.src = pokemonList[Math.floor(Math.random() * pokemonList.length)];
+      img.classList.add("pokemon");
       img.style.left = Math.random() * 100 + "vw";
-
-      // Random size between 60px and 120px
-      const size = 60 + Math.random() * 60;
-      img.style.width = size + "px";
-
-      // Random fall speed
       img.style.animationDuration = (6 + Math.random() * 5) + "s";
-
       document.body.appendChild(img);
+
       setTimeout(() => img.remove(), 12000);
     }
 
-    // Keep spawning items
-    setInterval(createFallingItem, 800);
+    setInterval(createPokemon, 900);
   </script>
 </body>
 </html>
-
